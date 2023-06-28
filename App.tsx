@@ -6,11 +6,13 @@ function App() {
 
   // API calling function with 2 arguments to handle
   const fetchApiData = (before = '', after = '') => {
+    console.log('before => ', before, 'after => ', after);
     fetch(
       `https://api.reddit.com/r/dataisbeautiful/new?after=${after}&limit=10&before=${before}`,
     )
       .then(response => response.json())
       .then(data => {
+        console.log('API response => ', data.data.children);
         let dataToBeSet = [];
         if (before === '' && after === '') {
           // base case if both are empty
@@ -56,6 +58,8 @@ function App() {
       fetchApiData(listData[0].data.name, ''); // before name is passed and after is kept empty
     }
   };
+
+  console.log('listData.length => ', listData.length);
 
   return (
     <FlatList
